@@ -1,4 +1,4 @@
-# MiWOM: Auth
+# Ransomware
 
 ## Setup Environment
 
