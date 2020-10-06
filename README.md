@@ -14,7 +14,7 @@ cp .env.example .env
 
 ```bash
 
-Usage: --f [folder] --a [algorithm] --p [password] --d (decode) --e (encode)
+Usage: -f [folder] -a [algorithm] -p [password] -d (decode) -e (encode)
 
 
 ```
@@ -25,7 +25,7 @@ Example for decode
 
 ```bash
 
-yarn run start --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -d
+yarn run start -f '/Users/edson.perez/Desktop/node-ransomware/toEncode' -a 'aes-192-cbc' -p 'qweqwe' -d
 
 ```
 
@@ -33,7 +33,7 @@ Example for encode
 
 ```bash
 
-yarn run start --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -e
+yarn run start -f '/Users/edson.perez/Desktop/node-ransomware/toEncode' -a 'aes-192-cbc' -p 'qweqwe' -e
 
 ```
 
@@ -41,10 +41,10 @@ yarn run start --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'ae
 
 ```bash
 # Running app
-yarn run start --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -d
+yarn run start -f '/Users/edson.perez/Desktop/node-ransomware/toEncode' -a 'aes-192-cbc' -p 'qweqwe' -d
 
 # Running app in watch mode
-yarn run dev --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -d
+yarn run dev -f '/Users/edson.perez/Desktop/node-ransomware/toEncode' -a 'aes-192-cbc' -p 'qweqwe' -d
 
 ```
 
