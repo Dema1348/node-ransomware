@@ -10,27 +10,47 @@ yarn install
 cp .env.example .env
 ```
 
+## Command options
+
+```bash
+
+Usage: --f [folder] --a [algorithm] --p [password] --d (decode) --e (encode)
+
+
+```
+
+## Example
+
+Example for decode
+
+```bash
+
+yarn run start --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -d
+
+```
+
+Example for encode
+
+```bash
+
+yarn run start --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -e
+
+```
+
 ## Running
 
 ```bash
 # Running app
-yarn run start
-
-# Load environment vars on .env file if exists and running app
-yarn run start:dotenv
+yarn run start -- --f '/Users/edson.perez/Desktop/node-ransomware/toEncode' --a 'aes-192-cbc' --p 'qweqwe' -d
 
 # Running app in watch mode
 yarn run dev
 
-# Load environment vars on .env file is exists and running app in watch mode
-yarn run dev:dotenv
 ```
 
 ## Testing
 
 ```bash
-# Optional, by default read vars on .env file
-cp .env.example .env.test
 
 # Only run test
 yarn run test
