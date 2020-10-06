@@ -2,13 +2,13 @@
   "name": "node-ransomware",
   "version": "0.0.1",
   "description": "",
-  "main": "server.js",
+  "main": "clie.js",
   "private": true,
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "start": "node src/server.js",
+    "start": "node -r esm src/cli.js",
     "dev": "nodemon --watch src --exec npm run start",
     "code:format": "prettier ./src/**/*.{js,json,md,yaml,yml}"
   },
@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "moment": "^2.24.0",
     "simple-node-logger": "^18.12.24",
     "yargs": "^16.0.4-candidate.0"
