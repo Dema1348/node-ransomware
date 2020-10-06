@@ -9,9 +9,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "start": "node src/server.js",
-    "start:dotenv": "node -r dotenv/config src/server.js",
     "dev": "nodemon --watch src --exec npm run start",
-    "dev:dotenv": "nodemon --watch src --exec npm run start:dotenv",
     "code:format": "prettier ./src/**/*.{js,json,md,yaml,yml}"
   },
   "author": "Edson Pérez",
@@ -19,7 +17,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
-    "simple-node-logger": "^18.12.24"
+    "simple-node-logger": "^18.12.24",
+    "yargs": "^16.0.4-candidate.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

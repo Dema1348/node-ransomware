@@ -62,9 +62,14 @@ const encodeFolder = (folder, algorithm, password) => {
         logger.info(fullPath);
         const { ext } = path.parse(fullPath);
         if (ext !== `.${EXT}`) {
-          await encode(fullPath, algorithm, password);
-          logger.info(`Encode file ${fullPath}`);
-          fs.unlinkSync(fullPath);
+          try {
+            await encode(fullPath, algorithm, password);
+            logger.info(`Encode file ${fullPath}`);
+            fs.unlinkSync(fullPath);
+          } catch (error) {
+            logger.error(error);
+            logger.info(`Encode fail ${fullPath}`);
+          }
         }
       }
     });
@@ -81,9 +86,14 @@ const decodeFolder = (folder, algorithm, password) => {
         logger.info(fullPath);
         const { ext } = path.parse(fullPath);
         if (ext === `.${EXT}`) {
-          await decode(fullPath, algorithm, password);
-          logger.info(`Decode file ${fullPath}`);
-          fs.unlinkSync(fullPath);
+          try {
+            await decode(fullPath, algorithm, password);
+            logger.info(`Decode file ${fullPath}`);
+            fs.unlinkSync(fullPath);
+          } catch (error) {
+            logger.error(error);
+            logger.info(`Decode fail ${fullPath}`);
+          }
         }
       }
     });
