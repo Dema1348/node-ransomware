@@ -95,7 +95,7 @@ const decodeFolder = async (folder, algorithm, password) => {
         logger.info(fullPath);
         const { ext } = path.parse(fullPath);
 
-        if (ext !== `.${EXT}`) {
+        if (ext === `.${EXT}`) {
           try {
             await decode(fullPath, algorithm, password);
             logger.info(`Decode file ${fullPath}`);
