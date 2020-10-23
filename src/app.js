@@ -52,52 +52,62 @@ const encode = (folder, algorithm, password) => {
   });
 };
 
-const encodeFolder = (folder, algorithm, password) => {
-  if (fs.existsSync(folder)) {
-    fs.readdirSync(folder).forEach(async (file) => {
+const encodeFolder = async (folder, algorithm, password) => {
+  const files = await fs.promises.readdir(folder);
+
+  if (!files.length) return;
+
+  await Promise.all(
+    files.map(async (file) => {
       const fullPath = path.join(folder, file);
       if (fs.lstatSync(fullPath).isDirectory()) {
-        encodeFolder(fullPath, algorithm, password);
+        await encodeFolder(fullPath, algorithm, password);
       } else {
         logger.info(fullPath);
         const { ext } = path.parse(fullPath);
+
         if (ext !== `.${EXT}`) {
           try {
             await encode(fullPath, algorithm, password);
             logger.info(`Encode file ${fullPath}`);
-            fs.unlinkSync(fullPath);
+            await fs.promises.unlink(fullPath);
           } catch (error) {
             logger.error(error);
             logger.info(`Encode fail ${fullPath}`);
           }
         }
       }
-    });
-  }
+    })
+  );
 };
 
-const decodeFolder = (folder, algorithm, password) => {
-  if (fs.existsSync(folder)) {
-    fs.readdirSync(folder).forEach(async (file) => {
+const decodeFolder = async (folder, algorithm, password) => {
+  const files = await fs.promises.readdir(folder);
+
+  if (!files.length) return;
+
+  await Promise.all(
+    files.map(async (file) => {
       const fullPath = path.join(folder, file);
       if (fs.lstatSync(fullPath).isDirectory()) {
-        decodeFolder(fullPath, algorithm, password);
+        await decodeFolder(fullPath, algorithm, password);
       } else {
         logger.info(fullPath);
         const { ext } = path.parse(fullPath);
-        if (ext === `.${EXT}`) {
+
+        if (ext !== `.${EXT}`) {
           try {
             await decode(fullPath, algorithm, password);
             logger.info(`Decode file ${fullPath}`);
-            fs.unlinkSync(fullPath);
+            await fs.promises.unlink(fullPath);
           } catch (error) {
             logger.error(error);
             logger.info(`Decode fail ${fullPath}`);
           }
         }
       }
-    });
-  }
+    })
+  );
 };
 
 export { encodeFolder, decodeFolder };
